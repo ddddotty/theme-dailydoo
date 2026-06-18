@@ -1,0 +1,86 @@
+/* 每日海報主題行事曆 — shared design tokens (matches existing app) */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Noto+Sans+TC:wght@300;400;500;600;700;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+:root {
+  /* core palette — Art-Fair: near-white paper, chocolate-brown ink, pastel-blue accent */
+  --bg: #fbfaf7;
+  --bg-2: #f4f1ea;
+  --card: #ffffff;
+  --ink: #5a3a26;                     /* chocolate brown */
+  --ink-deep: #2a1a11;               /* deep coffee — footer & large dark blocks */
+  --ink-soft: #8a6e5a;
+  --ink-faint: #a89684;
+  --indigo: #3f9fc4;                  /* pastel-blue accent (primary) */
+  --indigo-2: #9bd2e6;               /* "today" soft blue */
+  --orange: #e89bb4;                  /* CTA — soft pastel pink */
+  --line: rgba(90, 58, 38, 0.16);
+  --line-soft: rgba(90, 58, 38, 0.08);
+  --btn-pink: #d4d2cf;                /* grey-pink button: grey base + pink left bar */
+  --btn-pink-line: #c0beba;
+  --btn-pink-bar: #f4b3d1;
+  --btn-pink-text: #4a4a4a;
+  --radius: 4px;
+}
+
+* { box-sizing: border-box; }
+
+.pc-root {
+  font-family: 'Noto Sans TC', 'Space Grotesk', system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.005em;
+}
+.pc-display {
+  font-family: 'Playfair Display', 'Noto Sans TC', serif;
+}
+.pc-mono { font-family: 'Space Grotesk', monospace; }
+
+/* faint Swiss grid background */
+.pc-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(90,58,38,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(90,58,38,0.05) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+.pc-grid-bg-dense {
+  background-image:
+    linear-gradient(to right, rgba(90,58,38,0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(90,58,38,0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+.pc-deco-line { height: 1px; background: var(--line); width: 100%; }
+
+/* tabular numerals for dates */
+.pc-tnum { font-variant-numeric: tabular-nums; }
+
+::selection { background: var(--indigo-2); color: #fff; }
+
+/* hide scrollbars where we manage scroll ourselves */
+.pc-noscroll::-webkit-scrollbar { display: none; }
+.pc-noscroll { scrollbar-width: none; }
+
+/* ── shared animations ── */
+@keyframes pc-spin { to { transform: rotate(360deg); } }
+@keyframes pc-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes pc-fade-up { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pc-modal-pop { from { opacity: 0; transform: translateY(20px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes pc-scrap-fall {
+  0% { transform: translate(0, 0) rotate(0); opacity: 1; }
+  100% { transform: translate(var(--drift), 520px) rotate(var(--rot)); opacity: 0; }
+}
+.pc-fade { animation: pc-fade 0.25s ease both; }
+.pc-fade-up { animation: pc-fade-up 0.3s cubic-bezier(.22,1,.36,1) both; }
+/* month swap: animate in but NEVER hold a hidden state (fill: none) so re-renders can't strand it at opacity 0 */
+@keyframes pc-month-swap { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.pc-month-swap { animation: pc-month-swap 0.32s cubic-bezier(.22,1,.36,1); }
+.pc-modal-pop { animation: pc-modal-pop 0.4s cubic-bezier(.22,1,.36,1) both; }
+@keyframes pc-flip-in {
+  0% { opacity: 0; transform: rotateY(70deg) scale(0.92); }
+  100% { opacity: 1; transform: rotateY(0) scale(1); }
+}
+.pc-flip-in { animation: pc-flip-in 0.55s cubic-bezier(.22,1,.36,1) both; transform-origin: center; }
+@keyframes pc-expand { from { opacity: 0; max-height: 0; } to { opacity: 1; max-height: 600px; } }
+.pc-expand { animation: pc-expand 0.3s ease both; overflow: hidden; }
