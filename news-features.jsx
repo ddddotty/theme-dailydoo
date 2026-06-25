@@ -75,10 +75,10 @@
 
       // ── year distribution band ──
       e("div", { style: { padding: "24px 0 26px" } },
-        e("div", { style: { display: "flex", alignItems: "baseline", gap: 14, marginBottom: 16 } },
+        e("div", { className: "np-yearhead", style: { display: "flex", alignItems: "baseline", gap: 14, marginBottom: 16, flexWrap: "wrap" } },
           e("h3", { className: "np-serif", style: { fontSize: 26, fontWeight: 800, margin: 0, flexShrink: 0, whiteSpace: "nowrap" } }, "全年 ", e("span", { style: { color: "var(--indigo)", fontStyle: "italic" } }, "365"), " 天"),
-          e("span", { className: "np-kicker" }, "THE WHOLE YEAR · 點選月份查看全部主題"),
-          e("div", { style: { flex: 1 } }),
+          e("span", { className: "np-kicker np-yearsub", style: { whiteSpace: "normal" } }, "THE WHOLE YEAR · 點選月份查看全部主題"),
+          e("div", { className: "np-yearspacer", style: { flex: 1 } }),
           e("span", { className: "np-kicker" }, "主題分佈")),
         // distribution bar
         e("div", { style: { display: "flex", height: 14, border: "1px solid var(--ink)", marginBottom: 18 } },

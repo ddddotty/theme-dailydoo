@@ -13,6 +13,7 @@
   max-width: 1200px;
   margin: 0 auto;
   background: var(--bg);
+  overflow-x: clip;
   padding: 0 clamp(16px, 4vw, 40px);
 }
 .np-serif { font-family: 'Playfair Display', 'Noto Serif TC', serif; }
@@ -124,7 +125,7 @@
   .np-band2 > div + div { border-top: 1px solid var(--rule-soft); }
   .np-monthgrid { grid-template-columns: repeat(3, 1fr) !important; }
   .np-idxcols { column-count: 2 !important; }
-  .np-tearcol { padding: 22px 0 !important; }
+  .np-tearcol { padding: 22px 0 !important; overflow-x: clip; }
 }
 @media (max-width: 520px) {
   .np-monthgrid { grid-template-columns: repeat(2, 1fr) !important; }
@@ -132,6 +133,9 @@
   .np-tagline { white-space: normal !important; line-height: 1.7; }
   /* tear card (380px + nav buttons) is too wide for phones — scale it down */
   .np-tearscale { transform: scale(0.74) !important; transform-origin: top center; margin-bottom: -150px !important; }
+  /* year band header: let it wrap, hide the flex spacer + 主題分佈 label */
+  .np-yearsub { flex-basis: 100%; }
+  .np-yearspacer { display: none !important; }
 }
 @media (max-width: 380px) {
   .np-tearscale { transform: scale(0.64) !important; margin-bottom: -200px !important; }
