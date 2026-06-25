@@ -69,7 +69,7 @@
           e(Icon, { name: soundOn ? "volume" : "volumeX", size: 14 }),
           e("span", { className: "np-mono", style: { fontSize: 10, letterSpacing: "0.1em" } }, soundOn ? "音效" : "靜音"))),
       e("hr", { className: "np-rule-double" }),
-      e("div", { className: "np-kicker", style: { textAlign: "center", padding: "8px 0" } }, "365 天的海報設計主題靈感 · 每天撕下一張，揭開新的創作"),
+      e("div", { className: "np-kicker np-tagline", style: { textAlign: "center", padding: "8px 0" } }, "365 天的海報設計主題靈感 · 每天撕下一張，揭開新的創作"),
       e("hr", { className: "np-rule-thick" }),
 
       // hero band: ① today | tear card | ② how-to
@@ -91,8 +91,8 @@
           K().CreatorBox()),
 
         // ── center: the tear card hero ──
-        e("div", { style: { padding: "22px 24px", borderRight: "1px solid var(--rule-soft)", display: "flex", flexDirection: "column", alignItems: "center" } },
-          e("div", { style: { transform: "scale(0.92)", transformOrigin: "top center", marginBottom: -34 } },
+        e("div", { className: "np-tearcol", style: { padding: "22px 24px", borderRight: "1px solid var(--rule-soft)", display: "flex", flexDirection: "column", alignItems: "center" } },
+          e("div", { className: "np-tearscale", style: { transform: "scale(0.92)", transformOrigin: "top center", marginBottom: -34 } },
             e(window.TearCard, { ref: tearRef, soundOn, onOpenDay: openDay, onChange: setTearInfo })),
           e("div", { className: "np-kicker", style: { textAlign: "center", marginTop: 18, borderTop: "1px solid var(--rule-soft)", paddingTop: 10, width: "100%" } },
             "▲ 今日海報主題 · 抓住右下角往左上撕，揭開明日"),

@@ -7,6 +7,7 @@
   font-family: 'Noto Sans TC', system-ui, sans-serif;
   color: var(--ink);
   background: var(--bg);
+  overflow-x: hidden;
 }
 .np-paper {
   max-width: 1200px;
@@ -117,13 +118,21 @@
   .np-cols-2 { column-count: 1; }
   .np-hero3 { grid-template-columns: 1fr !important; }
   .np-hero3 > div { border-right: none !important; padding: 22px 0 !important; border-bottom: 1px solid var(--rule-soft); }
+  .np-hero3 > div:last-child { border-bottom: none; }
   .np-band2 { grid-template-columns: 1fr !important; }
   .np-band2 > div { border-right: none !important; padding: 24px 0 !important; }
   .np-band2 > div + div { border-top: 1px solid var(--rule-soft); }
   .np-monthgrid { grid-template-columns: repeat(3, 1fr) !important; }
   .np-idxcols { column-count: 2 !important; }
+  .np-tearcol { padding: 22px 0 !important; }
 }
 @media (max-width: 520px) {
   .np-monthgrid { grid-template-columns: repeat(2, 1fr) !important; }
   .np-idxcols { column-count: 1 !important; }
+  .np-tagline { white-space: normal !important; line-height: 1.7; }
+  /* tear card (380px + nav buttons) is too wide for phones — scale it down */
+  .np-tearscale { transform: scale(0.74) !important; transform-origin: top center; margin-bottom: -150px !important; }
+}
+@media (max-width: 380px) {
+  .np-tearscale { transform: scale(0.64) !important; margin-bottom: -200px !important; }
 }
