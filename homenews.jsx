@@ -36,7 +36,7 @@
   };
 
   const CAT_BLURB = {
-    h: "節慶與紀念的日子", i: "世界共同關注的紀念日", n: "二十四節氣與自然時序",
+    h: "節慶與紀念的日子", i: "世界共同關注的紀念日", n: "二十四節氣",
     p: "勵志、成長與自我對話", c: "藝術、設計與文化", l: "生活風格與日常美學", d: "值得發聲的社會議題",
   };
 
@@ -126,7 +126,7 @@
 
     // counts per category
     const counts = {}; PC.CAT_ORDER.forEach((k) => (counts[k] = 0));
-    PC.DATA.forEach((d) => counts[d.category]++);
+    PC.DATA.forEach((d) => { counts[d.category]++; if (d.altCat) counts[d.altCat]++; });
 
     // month picks: notable entries (holidays/international/design first), up to 6
     const monthEntries = PC.DATA.filter((d) => d.month === viewMonth);

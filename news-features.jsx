@@ -36,7 +36,7 @@
             PC.CAT_ORDER.map((k) => {
               const c = PC.CAT[k];
               const isOpen = openCat === k;
-              const items = PC.DATA.filter((d) => d.category === k);
+              const items = PC.DATA.filter((d) => d.category === k || d.altCat === k);
               return e(React.Fragment, { key: k },
                 e("button", { onClick: () => setOpenCat(isOpen ? null : k),
                   "aria-expanded": isOpen, title: isOpen ? "收合" : "展開清單",
