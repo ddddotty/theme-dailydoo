@@ -83,7 +83,7 @@
           e("h2", { className: "np-serif", style: { fontSize: 40, fontWeight: 800, lineHeight: 1.1, margin: "0 0 14px" } },
             e(Mark, { color: tc.soft }, today.theme)),
           e("p", { className: "np-body np-dropcap", style: { margin: "0 0 14px" } },
-            `${today.subtitle}。今天是${PC.MONTHS[today.month - 1]}${today.day}日，${PC.CAT[today.category].label}。翻開桌上的日曆，以「${today.theme}」為題，為今天設計一張海報——靈感，就從這裡開始。`),
+            `${today.subtitle}。今天是${today.month}月${today.day}日，${PC.CAT[today.category].label}。翻開桌上的日曆，以「${today.theme}」為題，為今天設計一張海報——靈感，就從這裡開始。`),
           e("div", { style: { display: "inline-flex", alignItems: "center", gap: 7 } },
             e("span", { style: { width: 9, height: 9, borderRadius: "50%", background: tc.color } }),
             e("span", { style: { fontSize: 12, fontWeight: 600, color: tc.text } }, PC.CAT[today.category].label),
