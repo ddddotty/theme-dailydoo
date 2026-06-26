@@ -10,6 +10,7 @@
   window.NewsFeatures = function NewsFeatures({ counts, viewMonth, showMonth, openDay }) {
     const { Mark, Ph, FeatureHead, CAT_BLURB } = K();
     const [rolling, setRolling] = React.useState(false);
+    const [openCat, setOpenCat] = React.useState(null);
     const rollRandom = () => {
       if (rolling) return;
       setRolling(true);
@@ -34,11 +35,23 @@
           e("div", null,
             PC.CAT_ORDER.map((k) => {
               const c = PC.CAT[k];
-              return e("div", { key: k, style: { display: "flex", alignItems: "center", gap: 12, padding: "9px 0", borderTop: "1px solid var(--rule-soft)" } },
-                e("span", { style: { width: 16, height: 16, background: c.color, flexShrink: 0 } }),
-                e("span", { className: "np-serif", style: { fontSize: 16, fontWeight: 700, width: 92, flexShrink: 0 } }, c.label),
-                e("span", { style: { flex: 1, fontSize: 12.5, color: "var(--ink-soft)" } }, CAT_BLURB[k]),
-                e("span", { className: "np-mono", style: { fontSize: 12, color: "var(--ink-faint)", flexShrink: 0 } }, `${counts[k]} 天`));
+              const isOpen = openCat === k;
+              const items = PC.DATA.filter((d) => d.category === k);
+              return e(React.Fragment, { key: k },
+                e("button", { onClick: () => setOpenCat(isOpen ? null : k),
+                  "aria-expanded": isOpen, title: isOpen ? "收合" : "展開清單",
+                  style: { width: "100%", display: "flex", alignItems: "center", gap: 12, padding: "9px 0", borderTop: "1px solid var(--rule-soft)", background: isOpen ? c.soft : "transparent", border: "none", borderTopWidth: 1, borderTopStyle: "solid", borderTopColor: "var(--rule-soft)", cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit" } },
+                  e("span", { style: { width: 16, height: 16, background: c.color, flexShrink: 0, marginLeft: isOpen ? 6 : 0 } }),
+                  e("span", { className: "np-serif", style: { fontSize: 16, fontWeight: 700, width: 92, flexShrink: 0 } }, c.label),
+                  e("span", { style: { flex: 1, fontSize: 12.5, color: "var(--ink-soft)" } }, CAT_BLURB[k]),
+                  e("span", { className: "np-mono", style: { fontSize: 12, color: "var(--ink-faint)", flexShrink: 0 } }, `${counts[k]} 天`),
+                  e("span", { style: { width: 16, flexShrink: 0, textAlign: "center", color: "var(--ink-faint)", fontSize: 11, transform: isOpen ? "rotate(90deg)" : "none", transition: "transform .18s" } }, "▶")),
+                isOpen && e("div", { style: { borderTop: "1px solid var(--rule-soft)", background: c.soft, padding: "12px 14px", maxHeight: 300, overflowY: "auto" } },
+                  e("div", { style: { display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(150px, 1fr))", gap: "5px 14px" } },
+                    items.map((d, di) => e("button", { key: di, onClick: () => openDay && openDay(d), title: "查看詳情",
+                      style: { display: "flex", alignItems: "baseline", gap: 8, padding: "3px 4px", background: "transparent", border: "none", cursor: "pointer", textAlign: "left", font: "inherit", color: "inherit", borderRadius: 2 } },
+                      e("span", { className: "np-mono", style: { fontSize: 11, color: c.text, flexShrink: 0, width: 38 } }, `${d.month}/${d.day}`),
+                      e("span", { style: { fontSize: 12.5, color: "var(--ink)", lineHeight: 1.35 } }, d.theme))))));
             })),
           // 隨機抽主題骰子
           e("div", { style: { display: "flex", alignItems: "center", gap: 14, marginTop: 22 } },
